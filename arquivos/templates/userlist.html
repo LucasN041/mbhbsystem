@@ -1,0 +1,56 @@
+{% extends "templates/indexoficiais.html" %}
+{% load static %}
+{% block main %}
+
+<h1>Usuários</h1>
+
+<p class="lead">Lista de Usuários</p>
+<div class="d-flex justify-content-end">
+    <a class="btn btn-dark btn-sm m-1" title="Adicionar Procedimento" href="{% url 'user_add' %}">Registrar Militar</a>
+    </div>
+
+<hr>
+<form class="input-group" method="get">
+    <input class='form-control' type="text" name="q" placeholder="Pesquisar por nickname">
+    <button class=" btn btn-dark"type=" submit">
+        <i class='bx bx-home-alt icon'>
+            <img width="35px" src="{% static "img/lupa.gif" %}" alt="">
+          </i></button>
+</form>
+<br>
+<div class="container">
+    <div class="row">
+        {% for user in users %}
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="text-center col-md-4">
+                        <img width="100px" src="http://www.habbo.com.br/habbo-imaging/avatarimage?&user={{ user.username }}&action=std&direction=2&head_direction=3&img_format=png&gesture=sml&frame=1&headonly=0&size=l" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p><strong>Nickname:</strong> {{user.username}}</p>
+                            <p><strong>Patente:</strong> <br>{{user.patente}}</p>
+                            {% if is_member_of_rh or is_member_of_altocomando %}
+                            <p><strong>Permissões:</strong> <br>{% for group in user.groups.all %}
+                                {{ group.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}</p>     
+                            {% endif %}                       
+                            <p><strong>Status:</strong> {{user.status}}</p>
+                            {% if is_member_of_rh or is_member_of_altocomando %}
+                                <a class="btn btn-dark" href="{% url 'user_edit' user.pk %}">Atualizar</a>
+                            {% endif %}
+                            {% if is_member_of_altocomando %}
+                                <a class="btn btn-dark" href="{% url 'user_delete' user.pk %}">Deletar</a>
+                                <a class="m-2 btn btn-dark" href="{% url 'user_editac' user.pk %}">Editar</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock main %}

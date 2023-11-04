@@ -1,0 +1,22 @@
+{% extends "templates/indexoficiais.html" %}
+
+{% block main %}
+
+<h1>Formulário</h1>
+
+<p class="lead">Preencha todos os campos obrigatórios.</p>
+
+<hr>
+
+<form action="" method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p}}
+    <div class="d-flex justify-content-end">
+    <button type="submit" class="text-right btn btn-dark">Salvar</button>
+    </div>
+
+</form>
+<br>
+{% endblock main %}

@@ -1,0 +1,47 @@
+{% extends "templates/index.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="col-xl-12 m-auto">
+    <h1>Relatórios</h1>
+    <p class="lead">Preencha o relatório devidamente!</p>
+
+<hr>
+    <div class="d-flex justify-content-end">
+    <a class="btn btn-primary btn-sm m-1" title="Adicionar Procedimento" href="{% url 'cadastrarrelatorio' %}">Criar Relatório</a>
+    </div>
+    </div>
+    <br>
+{% for relatorio in relatorios %}
+<div class="card col-xl-12 m-auto">
+    <div class="container m-2">
+        <div class="row">
+            <i class='bx bx-home-alt icon'>
+                <img width="50px" src="{% static "img/relatorioicon.png" %}" alt="">
+                <span class="h5 card-title">{{ relatorio.treinamento }}</span>
+                <div class="container">
+                    <br>
+                <p> <strong> Treinador: </strong>   {{relatorio.treinador}}</p>
+
+                <p> <strong> Responsável: </strong>   {{relatorio.responsavel}}</p>
+                <p> <strong> Data: </strong> {{relatorio.data_preenchimento}}</p>
+                <p>
+                    <strong> Status: </strong> 
+                    <span class="{% if relatorio.status == 'Em espera...' %}text-primary{% elif relatorio.status == 'Aprovado' %}text-success{% elif relatorio.status == 'Rejeitado' %}text-danger{% endif %}">
+                        {{ relatorio.status }}
+                    </span>
+                </p>
+                </div>
+            </i>
+        </div>
+    </div>
+</div>
+
+
+
+<br>
+{% empty %}
+<li>Nenhum relatório encontrado.</li>
+{% endfor %}
+{% endblock main %}

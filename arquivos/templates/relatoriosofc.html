@@ -1,0 +1,58 @@
+{% extends "templates/indexoficiais.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="col-xl-12 m-auto">
+    <h1>Relatórios</h1>
+    <p class="lead">Preencha o relatório devidamente!</p>
+
+<hr>
+
+    </div>
+<!-- Adicione o formulário de busca aqui -->
+<form class="input-group" method="get">
+    <input class='form-control' type="text" name="q" placeholder="Pesquisar por data, treinador ou treinamento">
+    <button class=" btn btn-dark"type=" submit">
+        <i class='bx bx-home-alt icon'>
+            <img width="35px" src="{% static "img/lupa.gif" %}" alt="">
+          </i></button>
+</form>
+<br>
+
+{% for relatorio in relatorios %}
+<div class="card col-xl-12 m-auto">
+    <div class="container m-2">
+        <div class="row">
+            <i class='bx bx-home-alt icon'>
+                <img width="50px" src="{% static "img/relatorioicon.png" %}" alt="">
+                <span class="h5 card-title">{{ relatorio.treinamento }}</span>
+                <div class="container">
+                    <br>
+                <p> <strong> Treinador: </strong>   {{relatorio.treinador}}</p>
+
+                <p> <strong> Responsável: </strong>   {{relatorio.responsavel}}</p>
+                <p> <strong> Data: </strong> {{relatorio.data_preenchimento}}</p>
+                <p>
+                    <strong> Status: </strong> 
+                    <span class="{% if relatorio.status == 'Em espera...' %}text-primary{% elif relatorio.status == 'Aprovado' %}text-success{% elif relatorio.status == 'Rejeitado' %}text-danger{% endif %}">
+                        {{ relatorio.status }}
+                    </span>
+                </p>
+                <div class="m-2 text-right">
+                    <a class="btn btn-dark" href="{% url 'atualizarrelatorio' relatorio.pk %}">Revisar Relatório</a>
+                    {% if is_member_of_rh and is_member_of_altocomando %}
+                    <a class="btn btn-dark" href="{% url 'deletarrelatorio' relatorio.pk %}">Deletar Relatório</a>
+                {% endif %}
+                </div>
+            </i>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+{% empty %}
+<li>Nenhum relatório encontrado.</li>
+{% endfor %}
+
+{% endblock main %}

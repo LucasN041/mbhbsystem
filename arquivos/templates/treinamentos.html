@@ -1,0 +1,33 @@
+{% extends "templates/index.html" %}
+{% load static %}
+
+{% block main %}
+
+<h1>Treinamentos</h1>
+
+<p class="lead">Clique no treinamento para ter acesso ao script!</p>
+
+<hr>
+{% for treinamento in treinamentos %}
+<div class="card col-xl-12 m-auto">
+    <div class="container m-2">
+        <div class="row">
+            <i class='bx bx-home-alt icon'>
+                <img width="50px" src="{% static "img/relatorioicon.png" %}" alt="">
+                <span class="h5 card-title">{{ treinamento.titulo }}</span>
+                
+            </i>
+            <div class="m-2 text-right">
+                <a class="btn btn-primary" href="{% url 'detalhestreinamentos' treinamento.pk %}">Exibir Treinamento</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br>
+{% empty %}
+<li>Nenhum treinamento encontrado.</li>
+{% endfor %}
+{% endblock main %}

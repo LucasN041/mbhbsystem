@@ -1,0 +1,23 @@
+{% extends "templates/index.html" %}
+
+{% block main %}
+
+<h1>Configurações</h1>
+
+<p class="lead">Ter uma senha segura é muito importante!</p>
+
+<hr>
+<br>
+<form class="control-form" action="" method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p}}
+    <div class="d-flex justify-content-end">
+    <button type="submit" class="text-right btn btn-danger">Alterar</button>
+    </div>
+
+</form>
+
+{% endblock main %}
+

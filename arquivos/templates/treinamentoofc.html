@@ -1,0 +1,44 @@
+{% extends "templates/indexoficiais.html" %}
+{% load static %}
+
+{% block main %}
+
+<h1>Treinamentos</h1>
+
+<p class="lead">Clique no treinamento para ter acesso ao script!</p>
+
+<hr>
+{% if is_member_of_rh and is_member_of_altocomando %}
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-dark btn-sm m-1" title="Criar Documento" href="{% url 'cadastrartreinamento' %}">Cadastrar Treinamento</a>
+    </div>
+    <br>
+    {% endif %}
+{% for treinamento in treinamentos %}
+<div class="card col-xl-12 m-auto">
+    <div class="container m-2">
+        <div class="row">
+            <i class='bx bx-home-alt icon'>
+                <img width="50px" src="{% static "img/relatorioicon.png" %}" alt="">
+                <span class="h5 card-title">{{ treinamento.titulo }}</span>
+                
+            </i>
+            <div class="m-2 text-right">
+                <a class="btn btn-dark" href="{% url 'detalhestreinamentos' treinamento.pk %}">Exibir Treinamento</a>
+                {% if is_member_of_rh and is_member_of_altocomando %}
+                <a class="btn btn-dark" href="{% url 'atualizartreinamento' treinamento.pk %}">Editar Treinamento</a>
+                <a class="btn btn-dark" href="{% url 'deletartreinamento' treinamento.pk %}">Deletar Treinamento</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br>
+{% empty %}
+<li>Nenhum treinamento encontrado.</li>
+{% endfor %}
+{% endblock main %}

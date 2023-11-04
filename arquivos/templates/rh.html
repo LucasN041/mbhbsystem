@@ -1,0 +1,58 @@
+{% extends "templates/indexoficiais.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="col-xl-12 m-auto">
+    <h1>Requerimentos</h1>
+    <p class="lead">Recursos Humanos</p>
+
+<hr>
+
+    </div>
+<!-- Adicione o formulário de busca aqui -->
+<form class="input-group" method="get">
+    <input class='form-control' type="text" name="q" placeholder="Pesquisar por solicitante ou requerimento">
+    <button class=" btn btn-dark"type=" submit">
+        <i class='bx bx-home-alt icon'>
+            <img width="35px" src="{% static "img/lupa.gif" %}" alt="">
+          </i></button>
+</form>
+<br>
+
+{% for requerimento in requerimentos %}
+<div class="card col-xl-12 m-auto">
+    <div class="container m-2">
+        <div class="row">
+            <i class='bx bx-home-alt icon'>
+                <img width="50px" src="{% static "img/relatorioicon.png" %}" alt="">
+                <span class="h5 card-title">{{ requerimento.opcoes }}</span>
+                <div class="container">
+                    <br>
+                <p> <strong> Solicitante: </strong>   {{requerimento.solicitante}}</p>
+
+                <p> <strong> Militar: </strong>   {{requerimento.militar}}</p>
+                <p> <strong> Data: </strong> {{requerimento.data_preenchimento}}</p>
+                <p>
+                    <strong> Status: </strong> 
+                    <span class="{% if requerimento.status == 'Em espera...' %}text-primary{% elif requerimento.status == 'Aprovado' %}text-success{% elif requerimento.status == 'Rejeitado' %}text-danger{% endif %}">
+                        {{ requerimento.status }}
+                    </span>
+                </p>
+                <div class="m-2 text-right">
+                    {% if is_member_of_rh or is_member_of_altocomando %}
+                    <a class="btn btn-dark" href="{% url 'atualizarrequerimento' requerimento.pk %}">Revisar Requerimento</a>
+                    <a class="btn btn-dark" href="{% url 'deletarrequerimento' requerimento.pk %}">Deletar Requerimento</a> 
+                {% endif %}
+                </div>
+            </i>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+{% empty %}
+<li>Nenhum requerimento encontrado.</li>
+{% endfor %}
+
+{% endblock main %}

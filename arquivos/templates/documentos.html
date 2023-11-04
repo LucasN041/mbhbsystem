@@ -1,0 +1,33 @@
+{% extends "templates/index.html" %}
+{% load static %}
+
+{% block main %}
+
+<h1>Documentos</h1>
+
+<p class="lead">Clique no documento para ter acesso!</p>
+
+<hr>
+{% for documento in documentos %}
+<div class="card col-xl-12 m-auto">
+    <div class="container m-2">
+        <div class="row">
+            <i class='bx bx-home-alt icon'>
+                <img width="50px" src="{% static "img/documentoicon.png" %}" alt="">
+                <span class="h5 card-title">{{ documento.titulo }}</span>
+                
+            </i>
+            <div class="m-2 text-right">
+                <a class="btn btn-primary" href="{% url 'detalhesdocumentos' documento.pk %}">Exibir Documento</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br>
+{% empty %}
+<li>Nenhum documento encontrado.</li>
+{% endfor %}
+{% endblock main %}

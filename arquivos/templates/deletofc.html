@@ -1,0 +1,26 @@
+{% extends "templates/indexoficiais.html" %}
+
+{% block main %}
+
+
+
+<h1>Excluir</h1>
+
+<p class="lead">Confirme para excluir definitivamente.</p>
+
+<hr>
+
+<form action="" method="POST">
+
+    <p>
+        Deseja excluir: <strong>{{object}}</strong> ?
+    </p>
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-danger">Excluir</button>
+
+</form>
+{% endblock main %}

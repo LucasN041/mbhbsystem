@@ -1,0 +1,141 @@
+{% load static %}
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marinha do Brasil - Habbo </title>
+    <link rel="icon" type="image/x-icon" href="{% static "img/MarBrs.ico" %}"> 
+    <link rel="stylesheet" href="{% static 'boostr/bootstrap.min.css' %}">
+    <script src="{% static 'boostr/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/ofc.css' %}">
+
+</head>
+<body class="bg-body-tertiary">
+    {% comment %} <nav class="navbar border-bottom border-primary-emphasis border-3" style="background-color: #005fb2;">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="{% static "img/MarBrs.ico" %}" alt="Marinha do Brasil" width="60" height="60">
+          </a>
+        </div>
+      </nav> {% endcomment %}
+      <nav style="background:#212529;" class="sidebar close">
+        <header>
+          <br>
+            <i class='bg-body-tertiary toggle'>
+              <img src="{% static "img/icon.png" %}" alt="">
+            </i>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <div class="menu-links">
+                  <li class="nav-link">
+                    <a href="{% url "user_list" %}">
+                        <i class='bx bx-group icon' >
+                          <img width="35px" src="{% static "img/user.png" %}" alt="">
+                        </i>
+                        <span class="text nav-text">Militares</span>
+                    </a>
+                </li>
+
+                    <li class="nav-link">
+                        <a href="{% url "mostrartreinamentoofc" %}">
+                            <i class='bx bx-group icon' >
+                              <img width="40px" src="{% static "img/treinamentosicon.png" %}" alt="">
+                            </i>
+                            <span class="text nav-text">Dep. Ensino</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url "documentosofc" %}">
+                            <i class='bx bx-file icon'>
+                              <img width="40px" src="{% static "img/documentoicon.png" %}" alt="">
+                            </i>
+                            <span class="text nav-text">Documentos</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url "relatoriosofc"%}">
+                            <i class='bx bx-list-check icon' >
+                              <img width="40px" src="{% static "img/relatorioicon.png" %}" alt="">
+                            </i>
+                            <span class="text nav-text">Relatórios</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                      <a href="{% url "requerimentorh" %}">
+                          <i class='bx bx-list-check icon' >
+                            <img width="40px" src="{% static "img/rhicon.png" %}" alt="">
+                          </i>
+                          <span class="text nav-text">Dep. RH</span>
+                      </a>
+                  </li>
+
+                    <li class="nav-link">
+                        <a href="{% url "cadastrarrequerimento" %}">
+                            <i class='bx bx-cog icon' >
+                              <img width="40px" src="{% static "img/requerimento.png" %}" alt="">
+                            </i>
+                            <span class="text nav-text">Requerimento</span>
+                        </a>
+                    </li>
+          </div>
+        </div>
+        <div class="bottom-content">
+          <li class="">
+              <a href="{% url 'logout' %}">
+                  <i class='bx bx-log-out icon' >
+                    <img width="40px" src="{% static "img/sairicon.png" %}" alt="">
+                  </i>
+                  <span class="text nav-text">Sair</span>
+              </a>
+          </li>
+      </div>
+            
+        </div>
+    </nav>
+    <div class="home">
+      <div class="col-10 m-auto mt-4">
+        {% block main %}{% endblock main %}
+        </div>
+      </div>
+    <script>
+      const body = document.querySelector('body');
+      const sidebar = body.querySelector('nav');
+      const toggle = body.querySelector('.toggle');
+      const searchBtn = body.querySelector('.search-box');
+      const modeSwitch = body.querySelector('.toggle-switch');
+      const modeText = body.querySelector('.mode-text');
+      
+      // Função para verificar e restaurar o estado da barra lateral
+      function checkSidebarState() {
+        const sidebarState = localStorage.getItem('sidebarState');
+      
+        if (sidebarState === 'closed') {
+          sidebar.classList.add('close');
+        } else {
+          sidebar.classList.remove('close');
+        }
+      }
+      
+      // Verifica e restaura o estado da barra lateral quando a página é carregada
+      checkSidebarState();
+      
+      // Adiciona um ouvinte de evento ao botão de alternância (toggle)
+      toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('close');
+        const sidebarState = sidebar.classList.contains('close') ? 'closed' : 'open';
+        localStorage.setItem('sidebarState', sidebarState);
+      });
+      
+      searchBtn.addEventListener('click', () => {
+        sidebar.classList.remove('close');
+      });
+      
+      
+    
+  </script>
+</body>
+</html>

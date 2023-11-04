@@ -1,0 +1,62 @@
+{% extends "templates/index.html" %}
+{% load static %}
+{% block main %}
+
+<h1>Principal</h1>
+
+<p class="lead">"Protegendo nossas riquezas, cuidando da nossa gente" 🎖️</p>
+{% if is_member_of_oficial %}
+<div class="d-flex justify-content-end">
+    <a style="background: rgb(0,73,137);
+    background: linear-gradient(90deg, rgba(0,73,137,1) 0%, rgba(0,73,137,1) 35%, rgba(0,73,137,1) 100%);" class="btn btn-primary m-1" title="Oficiais" href="{% url 'user_list' %}">Oficiais</a>
+    </div>                
+    {% endif %}
+<hr>
+<div class=''>
+    <div class="card col-12 col-xl-6">
+        <div style="background: rgb(0,73,137);
+        background: linear-gradient(90deg, rgba(0,73,137,1) 0%, rgba(0,73,137,1) 35%, rgba(0,73,137,1) 100%);" class="h2 text-light card-header">Busca Militar! 🎖️</div>
+        <br>
+        <div class="container m-auto">
+            <div class="row">
+                <form class='input-group' method="get">
+                    <input class='form-control' type="text" name="search" placeholder="Pesquisar por nick de usuário">
+                    <button style="background: rgb(0,73,137);
+                    background: linear-gradient(90deg, rgba(0,73,137,1) 0%, rgba(0,73,137,1) 35%, rgba(0,73,137,1) 100%);" class='btn' type="submit">
+                        <i class='bx bx-home-alt icon'>
+                            <img width="35px" src="{% static "img/lupa.gif" %}" alt="">
+                          </i>
+                    </button>
+                </form>
+                <div class='container'>
+                    <br>
+                {% if users %}
+                    <p class="m-1"><strong> Resultado da Busca: </strong></p>
+                    
+                        {% for user in users %}
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                              <div class=" text-center col-md-4">
+                                <img src="http://www.habbo.com.br/habbo-imaging/avatarimage?&user={{ user.username }}&action=std&direction=2&head_direction=3&img_format=png&gesture=sml&frame=1&headonly=0&size=l" class="img-fluid rounded-start" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                    <p> <strong> Nickname: </strong> {{user.username}}</p>
+                                    <p> <strong> Patente: </strong> {{user.patente}}</p>
+                                    <p> <strong> Responsável pela promoção: </strong> <br>{{user.responsavel}}</p>
+                                    <p> <strong> Data: </strong> {{user.datapromo}}</p>
+                                    <p> <strong> Status: </strong> {{user.status}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock main %}
