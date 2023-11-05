@@ -9,7 +9,7 @@ class RegistrationForm(forms.ModelForm):
 
 
 class EditFormUser(forms.ModelForm):
-    PATENTE_CHOICES = CustomUser.PATENTES[:7] 
+    PATENTE_CHOICES = CustomUser.PATENTES[:9] 
     patente = forms.ChoiceField(
         choices=PATENTE_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
