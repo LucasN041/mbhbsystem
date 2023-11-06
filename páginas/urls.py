@@ -1,4 +1,4 @@
-from .views import ViewPrincipal
+from .views import ViewPrincipal, ViewUniformes
 from relatorios.views import MostrarRelatorios
 from controledeacesso.views import AlterarSenhaView
 from django.urls import path
@@ -15,4 +15,5 @@ urlpatterns = [
     path('treinamentos/<int:pk>/', TreinamentosDetailView.as_view(), name='detalhestreinamentos'),
     path('documentos/<int:pk>/', DocumentoDetailView.as_view(), name='detalhesdocumentos'),
     path('documentos/', MostrarDocumento.as_view(), name='documentos'),
+    path('uniformes/', ViewUniformes.as_view(), name='uniformes'),
 ]

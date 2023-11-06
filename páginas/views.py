@@ -22,4 +22,7 @@ class ViewPrincipal(GroupRequiredMixin, LoginRequiredMixin, TemplateView):
         }
         return self.render_to_response(context)
 
-        
+class ViewUniformes(GroupRequiredMixin, LoginRequiredMixin, TemplateView):
+    group_required = [u"praça", u"oficial"]
+    login_url = reverse_lazy('login')
+    template_name = 'templates/uniformes.html'

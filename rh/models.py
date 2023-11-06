@@ -8,6 +8,7 @@ class Requerimento(models.Model):
         ('Promoção', 'Promoção'),
         ('Rebaixamento', 'Rebaixamento'),
         ('Demissão', 'Demissão'),
+        ('Reserva', 'Reserva'),
     )
 
     STATUS = (

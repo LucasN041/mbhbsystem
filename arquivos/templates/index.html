@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 </head>
-<body class="bg-body-tertiary">
+<body style="display: flex; flex-direction: column; min-height: 100vh;" class="bg-body-tertiary">
     {% comment %} <nav class="navbar border-bottom border-primary-emphasis border-3" style="background-color: #005fb2;">
         <div class="container">
           <a class="navbar-brand" href="#">
@@ -39,6 +39,14 @@
                             <span class="text nav-text">Principal</span>
                         </a>
                     </li>
+                    <li class="nav-link">
+                      <a href="{% url "uniformes" %}">
+                          <i class='bx bx-home-alt icon'>
+                            <img width="40px" src="{% static "img/uniforme.png" %}" alt="">
+                          </i>
+                          <span class="text nav-text">Uniformes</span>
+                      </a>
+                  </li>
 
                     <li class="nav-link">
                         <a href=" {% url "treinamentos" %}">
@@ -84,8 +92,10 @@
                     <img width="40px" src="{% static "img/sairicon.png" %}" alt="">
                   </i>
                   <span class="text nav-text">Sair</span>
+                  
               </a>
           </li>
+          
       </div>
             
         </div>
